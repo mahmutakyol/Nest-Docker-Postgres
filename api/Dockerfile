@@ -1,10 +1,11 @@
 FROM node:12.19.0
 
-WORKDIR /valde/src/api
+WORKDIR /usr/src/api
 
-COPY package*.json ./
+COPY package*.json yarn.lock ./
 
-RUN npm install
+RUN npm install && \
+npm rebuild bcrypt --build-from-source
 
 COPY . .
 

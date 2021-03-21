@@ -12,6 +12,8 @@ services:
       PORT: 3000
     ports: 
       - "8080:3000"
+    volumes:
+      - /usr/src/app/node_modules
   
   postgres: 
     image: postgres:13
