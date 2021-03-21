@@ -577,7 +577,7 @@
     webpack "5.11.0"
     webpack-node-externals "2.5.2"
 
-"@nestjs/common@^7.0.0":
+"@nestjs/common@^7.6.14":
   version "7.6.14"
   resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-7.6.14.tgz#abdad360ef107482345b111eeee74fbef00620c9"
   integrity sha512-XJrGoGttCsIOvG2+EXl09pl9iCmYXnhPjx3ndPPigMRdXQGLVpF38OdzroWTD7aYU5rHo3Co21G9cYl8aqdt2Q==
@@ -599,7 +599,7 @@
     lodash.set "4.3.2"
     uuid "8.3.2"
 
-"@nestjs/core@^7.0.0":
+"@nestjs/core@^7.6.14":
   version "7.6.14"
   resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-7.6.14.tgz#b3be15506aee33b847abce993a7371439b292dd9"
   integrity sha512-iAeQIsC79xcLTpga3he48ROX4g561VFsfbksicqotrFy0k9czKxVtHxevsnwo8KzFsYXQqOCO6XYI8MsuAjMcg==
@@ -612,7 +612,7 @@
     tslib "2.1.0"
     uuid "8.3.2"
 
-"@nestjs/platform-express@^7.0.0":
+"@nestjs/platform-express@^7.6.14":
   version "7.6.14"
   resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-7.6.14.tgz#b16de114421492b719d924a8abf408071c75898e"
   integrity sha512-0e+byDx6Ak3avSkhMlZfs65vqzjqn/kdpR6EdtifIpIsJWYo0ZapbCNBqyQ2RLFq/IBjP6Y9nWO6HNSOOM60Kw==
