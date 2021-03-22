@@ -10,18 +10,18 @@ export class UserController {
 
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+    return await this.userService.create(createUserDto);
   }
 
   @Post('login')
   @HttpCode(200)
   async login(@Body() loginUserDto: LoginUserDto) {
-    return this.userService.login(loginUserDto);
+    return await this.userService.login(loginUserDto);
   }
 
   @Get()
   async findAll() {
-    return this.userService.findAll();
+    return await this.userService.findAll();
   }
 
 }

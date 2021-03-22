@@ -13,9 +13,6 @@ export class AuthorEntity {
   @Column()
   surname: string;
 
-  @Column({ unique: true })
-  email: string;
-
   @OneToMany(() => BookEntity, bookEntity => bookEntity.author)
     books: BookEntity[];
 
