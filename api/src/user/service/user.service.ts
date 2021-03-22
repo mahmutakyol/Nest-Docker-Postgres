@@ -31,6 +31,9 @@ export class UserService {
 
   async login(loginUserDto: LoginUserDto){
     const user: IUser = await this.findUserByEmail(loginUserDto.email);
+    if (!user) {
+      throw new HttpException('User not found.', HttpStatus.NOT_FOUND);
+    }
     const passwordMatches = await this.validatePassword(loginUserDto.password, user.password);
     if (passwordMatches) {
       return 'Login was successfull...'
