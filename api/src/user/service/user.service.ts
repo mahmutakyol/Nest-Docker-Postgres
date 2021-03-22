@@ -12,8 +12,8 @@ export class UserService {
 
   constructor(
     @InjectRepository(UserEntity)
-    private userRepository: Repository<UserEntity>,
-    private authService: AuthService
+    private readonly userRepository: Repository<UserEntity>,
+    private readonly authService: AuthService
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -36,7 +36,8 @@ export class UserService {
     }
     const passwordMatches = await this.validatePassword(loginUserDto.password, user.password);
     if (passwordMatches) {
-      return 'Login was successfull...'
+      const jwt = await this.authService.generataJWT(user);
+      return { access_token: jwt }
     } else {
       throw new HttpException('Login was not Successfull', HttpStatus.UNAUTHORIZED);
     }
