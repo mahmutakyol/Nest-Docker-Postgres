@@ -33,9 +33,20 @@ export default {
       return dispatch('attempt', response.data)
     },
 
+    async signUp ({ dispatch }, credentials) {
+      let response = await axios.post('/users', credentials)
+
+      return dispatch('attempt', response.data)
+    },
+
     async attempt ({ commit }, data) {
-      commit('SET_TOKEN', data.access_token)
-      commit('SET_USER', data.user)
+      if (data.access_token) {
+        commit('SET_TOKEN', data.access_token)  
+      }
+
+      if (data.user) {
+        commit('SET_USER', data.user)
+      }
     },
 
     signOut ({ commit }) {

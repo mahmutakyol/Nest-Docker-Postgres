@@ -21,7 +21,9 @@ export class UserService {
       createUserDto.password = await this.authService.hashPassword(createUserDto.password);
       const savedUser = await this.userRepository.save(createUserDto);
       const {password, ...user} = savedUser;
-      return user;
+      return {
+        user: user
+      };
 
     } else {
       throw new HttpException('Email already taken', HttpStatus.CONFLICT)

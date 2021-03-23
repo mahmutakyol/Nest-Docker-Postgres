@@ -1,13 +1,74 @@
 <template>
-  <div>
-    Dashboard
-  </div>
+  <v-main>
+    <v-row class="mt-16">
+      <Books />
+      <AddBook />
+      <Authors />
+      <AddAuthor />
+    </v-row>
+  </v-main>
 </template>
 
 <script>
+import Books from '../components/book/Books.vue'
+import AddBook from '../components/book/AddBook.vue'
+import Authors from '../components/author/Authors.vue'
+import AddAuthor from '../components/author/AddAuthor.vue'
 export default {
-  name: 'dashboard'
+	components: { 
+    Books,
+    AddBook,
+    Authors,
+    AddAuthor
+  },
+  name: 'dashboard',
 
+  data () {
+    return{
+      desserts: [
+        {
+          name: 'Frozen Yogurt',
+          calories: 159,
+        },
+        {
+          name: 'Ice cream sandwich',
+          calories: 237,
+        },
+        {
+          name: 'Eclair',
+          calories: 262,
+        },
+        {
+          name: 'Cupcake',
+          calories: 305,
+        },
+        {
+          name: 'Gingerbread',
+          calories: 356,
+        },
+        {
+          name: 'Jelly bean',
+          calories: 375,
+        },
+        {
+          name: 'Lollipop',
+          calories: 392,
+        },
+        {
+          name: 'Honeycomb',
+          calories: 408,
+        },
+        {
+          name: 'Donut',
+          calories: 452,
+        },
+        {
+          name: 'KitKat',
+          calories: 518,
+        },
+      ],
+    }
+  }
 }
 </script>
 

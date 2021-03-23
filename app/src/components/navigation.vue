@@ -9,6 +9,7 @@
       <v-btn text rounded @click="signOut()">Sign Out</v-btn>
     </template>
     <template v-else>
+      <v-btn text rounded @click="goTo('signup')">Sign Up</v-btn>
       <v-btn text rounded @click="goTo('signin')">Sign In</v-btn>
     </template>
   </v-app-bar>
