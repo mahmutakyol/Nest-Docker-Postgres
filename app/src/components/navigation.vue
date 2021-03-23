@@ -1,6 +1,6 @@
 <template>
   <v-app-bar app color="orange">
-    <v-toolbar-title>Valde / Book Storage</v-toolbar-title>
+    <v-toolbar-title>Book Storage</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn text rounded @click="goTo('home')">Home</v-btn>
     <template v-if="authenticated">
