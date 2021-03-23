@@ -31,17 +31,42 @@ export default {
   data() {
     return {
       form: {
+        id: null,
         name: null,
         surname: null,
       }
     }
   },
 
+  sockets: {
+    messageToClient(data) {
+      if (data.type === 'UpdateAuthor') {
+        this.form.id = data.data.id
+        this.form.name = data.data.name
+        this.form.surname = data.data.surname
+      }
+
+      console.log(this.form)
+    }
+  },
+
   methods: {
     submit() {
-      rest.post('http://localhost:8080/v1/authors', this.form, (res) => {
-        console.log(res)
-      })
+      if (this.form.id !== null) {
+        rest.put('http://localhost:8080/v1/authors/' + this.form.id, this.form, () => {
+          this.$socket.emit('messageToServer', {
+            type: 'UpdatedAuthor',
+            data: this.form
+          })
+        })
+      } else {
+        rest.post('http://localhost:8080/v1/authors', this.form, (res) => {
+          this.$socket.emit('messageToServer', {
+            type: 'AddAuthor',
+            data: res
+          })
+        })
+      }
     }
   }
 
