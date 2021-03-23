@@ -5,3 +5,4 @@
 - Vue.js
 - Docker
 - Postgres
+- Socket.io
