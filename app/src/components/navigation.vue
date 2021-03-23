@@ -1,25 +1,17 @@
 <template>
-  <ul>
-    <li>
-      <router-link :to="{ name: 'home' }">Home</router-link>
-    </li>
+  <v-app-bar app color="orange">
+    <v-toolbar-title>Valde / Book Storage</v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-btn text rounded @click="goTo('home')">Home</v-btn>
     <template v-if="authenticated">
-      <li>
-        {{ user.email }}
-      </li>
-      <li>
-        <router-link :to="{ name: 'dashboard' }">Dashboard</router-link>
-      </li>
-      <li>
-        <a href="#" @click="signOut()">Sign Out</a>
-      </li>
+      <v-btn text rounded disabled>{{ user.email }}</v-btn>
+      <v-btn text rounded @click="goTo('dashboard')">Dashboard</v-btn>
+      <v-btn text rounded @click="signOut()">Sign Out</v-btn>
     </template>
     <template v-else>
-      <li>
-        <router-link :to="{ name: 'signin' }">Sign In</router-link>
-      </li>
+      <v-btn text rounded @click="goTo('signin')">Sign In</v-btn>
     </template>
-  </ul>
+  </v-app-bar>
 </template>
 
 <script>
@@ -43,6 +35,10 @@ export default {
           name: 'home'
         })
       })
+    },
+
+    goTo(name) {
+      this.$router.replace({ name: name })
     }
   }
 }

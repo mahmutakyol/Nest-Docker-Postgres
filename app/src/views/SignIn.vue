@@ -1,17 +1,31 @@
 <template>
-  <form @submit.prevent="submit">
-    <div class="">
-      <label for="">Email</label>
-      <input type="text" name="email" id="email" v-model="form.email">
-    </div>
-    <div class="">
-      <label for="">Password</label>
-      <input type="password" name="password" id="password" v-model="form.password">
-    </div>
-    <div>
-      <button type="submit">Sign In</button>
-    </div>
-  </form>
+<v-main>
+    <v-card width="500" class="mx-auto mt-16">
+      <v-card-title>Sign In</v-card-title>
+      <v-form @submit.prevent="submit">
+        <v-card-text>
+          <v-text-field 
+            v-model="form.email"
+            label="Email"
+            prepend-icon="mdi-account-circle"
+          ></v-text-field>
+          <v-text-field
+            v-model="form.password"
+            label="Password"
+            :type="showPassword ? 'text' : 'password'"
+            prepend-icon="mdi-lock"
+            :append-icon="showPassword ? 'mdi-eye': 'mdi-eye-off'"
+            @click:append="showPassword = !showPassword"
+          ></v-text-field>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="success" type="Submit">Sign In</v-btn>
+        </v-card-actions>
+      </v-form>
+    </v-card>
+  </v-main>
 </template>
 
 <script>
@@ -22,6 +36,7 @@ export default {
 
   data () {
     return {
+      showPassword: false,
       form: {
         email: '',
         password: ''
