@@ -4,12 +4,19 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 
+require('@/store/subscriber')
+
 axios.defaults.baseURL = 'http://localhost:8080/v1'
 
 Vue.config.productionTip = false
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+store.dispatch('auth/attempt', { 
+  access_token: localStorage.getItem('token'),
+  user: JSON.parse(localStorage.getItem('user'))
+}).then(() => {
+  new Vue({
+    router,
+    store,
+    render: h => h(App)
+  }).$mount('#app')
+})
