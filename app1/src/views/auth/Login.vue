@@ -43,9 +43,10 @@ export default {
   },
   methods: {
     login() {
-      rest.post('http://localhost:8080/v1/users/login', this.form)
-      .then((res) => {
-        console.log(res)
+      rest.post('http://localhost:8080/v1/users/login', this.form, (res) => {
+
+        localStorage.token = res.access_token
+        console.log(localStorage)
       })
     } 
   }

@@ -7,7 +7,9 @@ import { IUser } from 'src/user/models/user.interface';
 @Injectable()
 export class AuthService {
 
-  constructor(private readonly jwtService: JwtService) {}
+  constructor(
+    private readonly jwtService: JwtService
+  ) {}
 
   async generataJWT(user: IUser) {
     return await this.jwtService.signAsync({ user });

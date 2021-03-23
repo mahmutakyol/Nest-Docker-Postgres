@@ -1,15 +1,16 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store'
-import axios from 'axios'
-
-axios.defaults.baseURL = 'http://localhost:8080/v1'
+import vuetify from './plugins/vuetify';
+import Axios from 'axios';
 
 Vue.config.productionTip = false
+Vue.prototype.$http = Axios;
 
-new Vue({
+window.router = router
+
+window.vue = new Vue({
   router,
-  store,
+  vuetify,
   render: h => h(App)
 }).$mount('#app')

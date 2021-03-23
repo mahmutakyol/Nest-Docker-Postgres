@@ -37,7 +37,10 @@ export class UserService {
     const passwordMatches = await this.validatePassword(loginUserDto.password, user.password);
     if (passwordMatches) {
       const jwt = await this.authService.generataJWT(user);
-      return { access_token: jwt }
+      delete user.password;
+      return { 
+        user: user,
+        access_token: jwt }
     } else {
       throw new HttpException('Login was not Successfull', HttpStatus.UNAUTHORIZED);
     }
@@ -45,6 +48,10 @@ export class UserService {
 
   async findAll() {
     return await this.userRepository.find();
+  }
+
+  async findOne(email: string) {
+    return this.userRepository.find({ email });
   }
 
   private async findUserByEmail(email: string) {
