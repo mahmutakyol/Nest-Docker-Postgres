@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import rest from '@/core/rest'
 export default {
   name: 'add-book',
 
@@ -33,6 +34,14 @@ export default {
         name: null,
         surname: null,
       }
+    }
+  },
+
+  methods: {
+    submit() {
+      rest.post('http://localhost:8080/v1/authors', this.form, (res) => {
+        console.log(res)
+      })
     }
   }
 

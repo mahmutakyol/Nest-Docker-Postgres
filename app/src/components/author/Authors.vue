@@ -13,9 +13,9 @@
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if="authors.length > 0">
           <tr
-            v-for="item in desserts"
+            v-for="item in authors"
             :key="item.name"
           >
             <td>{{ item.name }}</td>
@@ -28,15 +28,23 @@
 </template>
 
 <script>
+import rest from '@/core/rest'
 export default {
   data () {
     return{
-      desserts: [
-        {
-          name: 'Frozen Yogurt',
-          surname: 159,
-        }
-      ],
+      authors: [],
+    }
+  },
+
+  mounted() {
+    this.getAuthors()
+  },
+
+  methods: {
+    getAuthors() {
+      rest.get('http://localhost:8080/v1/authors', {}, (res) => {
+        this.authors = JSON.parse(JSON.stringify(res))
+      })
     }
   }
 }

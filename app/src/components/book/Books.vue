@@ -49,7 +49,6 @@ export default {
     getBooks() {
       rest.get('http://localhost:8080/v1/books', {}, (res) => {
         this.books = JSON.parse(JSON.stringify(res))
-        console.log(this.books)
       })
     }
   }
