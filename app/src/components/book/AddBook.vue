@@ -36,6 +36,7 @@ export default {
   data() {
     return {
       form: {
+        id: null,
         name: null,
         isbn: null,
         author: null
@@ -43,11 +44,34 @@ export default {
     }
   },
 
+  sockets: {
+    messageToClient(data) {
+      if (data.type === 'UpdateBook') {
+        this.form.id = data.data.id
+        this.form.name = data.data.name
+        this.form.isbn = data.data.isbn
+        this.form.author = data.data.author
+      }
+    }
+  },
+
   methods: {
     submit() {
-      rest.post('http://localhost:8080/v1/books', this.form, (res) => {
-        console.log(res)
-      })
+      if (this.form.id !== null) {
+        rest.put('http://localhost:8080/v1/books/' + this.form.id, this.form, () => {
+          this.$socket.emit('messageToServer', {
+            type: 'UpdatedBook',
+            data: this.form
+          })
+        })
+      } else {
+        rest.post('http://localhost:8080/v1/books', this.form, (res) => {
+          this.$socket.emit('messageToServer', {
+            type: 'AddBook',
+            data: res
+          })
+        })
+      }
     }
   }
 

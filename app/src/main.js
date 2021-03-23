@@ -4,6 +4,12 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import vuetify from './plugins/vuetify';
+import VueSocketIO from 'vue-socket.io'
+ 
+Vue.use(new VueSocketIO({
+    debug: true,
+    connection: 'http://localhost:8080'
+}))
 
 require('@/store/subscriber')
 

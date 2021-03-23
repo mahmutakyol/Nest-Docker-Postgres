@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { BooksModule } from './books/books.module';
 import { AuthorsModule } from './authors/authors.module';
+import { AppGateway } from './socket/app.gateway';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AuthorsModule } from './authors/authors.module';
     AuthModule,
     BooksModule,
     AuthorsModule
-  ]
+  ],
+  providers: [AppGateway]
 })
 export class AppModule {}

@@ -22,7 +22,8 @@ export class BooksService {
 
   async updateOne(id: number, book: IBook) {
     await this.bookRepository.update(id, book);
-    return await this.findOne(id);
+    const res = await this.findOne(id);
+    return res;
   }
 
   async deleteOne(id: number) {
