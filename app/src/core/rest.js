@@ -8,6 +8,7 @@ export default {
   new () {
 
     var instance = axios.create({
+      baseURL: `http://localhost:8080/v1`,
       headers: {
         'Content-type': 'application/json'
       }

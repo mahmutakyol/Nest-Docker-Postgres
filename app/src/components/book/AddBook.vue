@@ -13,9 +13,10 @@
           label="ISBN"
           prepend-icon="mdi-book"
         ></v-text-field>
-        <v-text-field 
-          v-model="form.author"
+        <v-text-field v-if="form.author !== null"
+          v-model="author_fullname"
           label="Author"
+          disabled
           prepend-icon="mdi-pen"
         ></v-text-field>
       </v-card-text>
@@ -35,6 +36,7 @@ export default {
 
   data() {
     return {
+      author_fullname: null,
       form: {
         id: null,
         name: null,
@@ -51,25 +53,38 @@ export default {
         this.form.name = data.data.name
         this.form.isbn = data.data.isbn
         this.form.author = data.data.author
+
+        if (this.form.author !== null) {
+          this.author_fullname = this.form.author.name + ' ' + this.form.author.surname
+        }
       }
     }
   },
 
   methods: {
+
+    clearForm() {
+      this.form.id = null
+      this.form.name = null
+      this.form.isbn = null
+      this.form.author = null
+    },
     submit() {
       if (this.form.id !== null) {
-        rest.put('http://localhost:8080/v1/books/' + this.form.id, this.form, () => {
+        rest.put('/books/' + this.form.id, this.form, () => {
           this.$socket.emit('messageToServer', {
             type: 'UpdatedBook',
             data: this.form
           })
+          this.clearForm()
         })
       } else {
-        rest.post('http://localhost:8080/v1/books', this.form, (res) => {
+        rest.post('/books', this.form, (res) => {
           this.$socket.emit('messageToServer', {
             type: 'AddBook',
             data: res
           })
+          this.clearForm()
         })
       }
     }
@@ -77,7 +92,3 @@ export default {
 
 }
 </script>
-
-<style>
-
-</style>

@@ -26,6 +26,7 @@
             <td>
               <v-btn color="warning" x-small type="button" @click="updateAuthor(item)">update</v-btn>
               <v-btn color="error" x-small type="button" @click="deleteAuthor(item.id)">delete</v-btn>
+              <v-btn v-if="canBeAdd" color="success" x-small type="button" @click="addAuthor(item)">add</v-btn>
             </td>
           </tr>
         </tbody>
@@ -37,14 +38,20 @@
 <script>
 import rest from '@/core/rest'
 export default {
-  data () {
-    return{
-      authors: [],
+  name: 'add-author',
+
+  props: {
+    authors: {
+      type: Array,
+      required: true
     }
   },
 
-  mounted() {
-    this.getAuthors()
+  data () {
+    return {
+      canBeAdd: false,
+      book: []
+    }
   },
 
   sockets: {
@@ -61,17 +68,17 @@ export default {
           }
         })
       }
+
+      if (data.type === 'AddAuthorToBook') {
+        this.canBeAdd = true
+        this.book = data.data
+      }
     }
   },
 
   methods: {
-    getAuthors() {
-      rest.get('http://localhost:8080/v1/authors', {}, (res) => {
-        this.authors = JSON.parse(JSON.stringify(res))
-      })
-    },
     deleteAuthor (id) {
-      rest.delete('http://localhost:8080/v1/authors/' + id, {}, () => {
+      rest.delete('/authors/' + id, {}, () => {
         this.authors = this.authors.filter(author => author.id != id)
       })
     },
@@ -81,11 +88,16 @@ export default {
         type: 'UpdateAuthor',
         data: author
       })
+    },
+
+    addAuthor (item) {
+      this.book.author = item
+      this.$socket.emit('messageToServer', {
+        type: 'BookAuthorAdded',
+        data: this.book
+      })
+      this.canBeAdd = false
     }
   }
 }
 </script>
-
-<style>
-
-</style>

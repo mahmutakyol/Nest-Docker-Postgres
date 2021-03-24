@@ -2,8 +2,8 @@
   <v-main>
     <v-row class="mt-16">
       <Books />
-      <AddBook />
-      <Authors />
+      <AddBook :authors="author_list" />
+      <Authors :authors="author_list" />
       <AddAuthor />
     </v-row>
   </v-main>
@@ -14,6 +14,8 @@ import Books from '../components/book/Books.vue'
 import AddBook from '../components/book/AddBook.vue'
 import Authors from '../components/author/Authors.vue'
 import AddAuthor from '../components/author/AddAuthor.vue'
+import rest from '@/core/rest'
+
 export default {
 	components: { 
     Books,
@@ -25,49 +27,20 @@ export default {
 
   data () {
     return{
-      desserts: [
-        {
-          name: 'Frozen Yogurt',
-          calories: 159,
-        },
-        {
-          name: 'Ice cream sandwich',
-          calories: 237,
-        },
-        {
-          name: 'Eclair',
-          calories: 262,
-        },
-        {
-          name: 'Cupcake',
-          calories: 305,
-        },
-        {
-          name: 'Gingerbread',
-          calories: 356,
-        },
-        {
-          name: 'Jelly bean',
-          calories: 375,
-        },
-        {
-          name: 'Lollipop',
-          calories: 392,
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-        },
-      ],
+      author_list: [],
     }
+  },
+
+  mounted() {
+    this.getAuthors()
+  },
+
+  methods: {
+    getAuthors() {
+      rest.get('http://localhost:8080/v1/authors', {}, (res) => {
+        this.author_list = JSON.parse(JSON.stringify(res))
+      })
+    },
   }
 }
 </script>

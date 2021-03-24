@@ -7,7 +7,7 @@ import vuetify from './plugins/vuetify';
 import VueSocketIO from 'vue-socket.io'
  
 Vue.use(new VueSocketIO({
-    debug: true,
+    // debug: true,
     connection: 'http://localhost:8080'
 }))
 

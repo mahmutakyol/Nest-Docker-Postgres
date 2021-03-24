@@ -31,7 +31,7 @@ export class BooksService {
   }
 
   async findAll() {
-    return await this.bookRepository.find();
+    return await this.bookRepository.find({ relations: ['author'] });
   }
 
   private async findOne(id: number) {

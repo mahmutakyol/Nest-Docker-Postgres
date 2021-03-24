@@ -45,26 +45,31 @@ export default {
         this.form.name = data.data.name
         this.form.surname = data.data.surname
       }
-
-      console.log(this.form)
     }
   },
 
   methods: {
+    clearForm() {
+      this.form.id = null
+      this.form.name = null
+      this.form.surname = null
+    },
     submit() {
       if (this.form.id !== null) {
-        rest.put('http://localhost:8080/v1/authors/' + this.form.id, this.form, () => {
+        rest.put('/authors/' + this.form.id, this.form, () => {
           this.$socket.emit('messageToServer', {
             type: 'UpdatedAuthor',
             data: this.form
           })
+          this.clearForm()
         })
       } else {
-        rest.post('http://localhost:8080/v1/authors', this.form, (res) => {
+        rest.post('/authors', this.form, (res) => {
           this.$socket.emit('messageToServer', {
             type: 'AddAuthor',
             data: res
           })
+          this.clearForm()
         })
       }
     }
