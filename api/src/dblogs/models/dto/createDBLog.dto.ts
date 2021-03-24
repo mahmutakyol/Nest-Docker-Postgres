@@ -1,13 +1,8 @@
-import { IsISBN, IsString } from "class-validator";
-import { IAuthor } from "src/authors/models/author.interface";
-
 export class CreateDBLogDto {
 
-  @IsString()
-  name: string;
+  type: string;
 
-  @IsISBN()
-  isbn: string;
+  description: string;
 
-  author: IAuthor;
+  created_at: Date;
 }

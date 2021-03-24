@@ -1,5 +1,4 @@
-import { AuthorEntity } from "src/authors/models/author.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class DBLogEntity {
@@ -8,11 +7,11 @@ export class DBLogEntity {
   id: number;
 
   @Column()
-  name: string;
+  type: string;
 
   @Column({ unique: true })
-  isbn: string;
+  description: string;
 
-  @ManyToOne(() => AuthorEntity, author => author.books)
-  author: AuthorEntity;
+  @Column()
+  created_at: Date;
 }
