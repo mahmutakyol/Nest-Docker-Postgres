@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { BooksModule } from './books/books.module';
 import { AuthorsModule } from './authors/authors.module';
 import { AppGateway } from './socket/app.gateway';
+import { DblogsModule } from './dblogs/dblogs.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { AppGateway } from './socket/app.gateway';
     UserModule,
     AuthModule,
     BooksModule,
-    AuthorsModule
+    AuthorsModule,
+    DblogsModule
   ],
   providers: [AppGateway]
 })
