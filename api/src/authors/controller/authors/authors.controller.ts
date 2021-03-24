@@ -22,22 +22,43 @@ export class AuthorsController {
       created_at: new Date()
     }
     await this.dbLogService.create(log)
-    return author;
+    return author
   }
 
   @Get()
   async findAll() {
-    return await this.authorService.findAll();
+    const authors = await this.authorService.findAll()
+    const log: CreateDBLogDto = {
+      type: 'GET',
+      description: 'Get All Authors',
+      created_at: new Date()
+    }
+    await this.dbLogService.create(log)
+    return authors
   }
 
   @Put(':id')
   async updateOne(@Param('id') id: number, @Body() author: IAuthor) {
-    return await this.authorService.updateOne(Number(id), author)
+    const updatedAuthor = await this.authorService.updateOne(Number(id), author)
+    const log: CreateDBLogDto = {
+      type: 'UPDATE',
+      description: 'Author Updated',
+      created_at: new Date()
+    }
+    await this.dbLogService.create(log)
+    return updatedAuthor
   }
 
   @Delete(':id')
   async deleteOne(@Param('id') id: number) {
-    return this.authorService.deleteOne(id);
+    const status = this.authorService.deleteOne(id);
+    const log: CreateDBLogDto = {
+      type: 'DELETE',
+      description: 'Author Deleted',
+      created_at: new Date()
+    }
+    await this.dbLogService.create(log)
+    return status;
   }
   
 }

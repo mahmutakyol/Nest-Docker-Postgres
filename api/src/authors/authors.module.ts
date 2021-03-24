@@ -10,7 +10,7 @@ import { DblogsModule } from 'src/dblogs/dblogs.module';
   imports: [
     TypeOrmModule.forFeature([AuthorEntity]),
     forwardRef(() => BooksModule),
-    DblogsModule
+    forwardRef(() => DblogsModule)
   ],
   providers: [AuthorsService],
   controllers: [AuthorsController]
