@@ -7,7 +7,6 @@
 - Postgres
 - Socket.io
 
-
 ## For Back End
 ```bash
 $ cd api  
@@ -21,3 +20,5 @@ $ cd app
 $ docker-compose build
 $ docker-compose up
 ```
+
+> after the running you can go `localhost:8081` on your browser
